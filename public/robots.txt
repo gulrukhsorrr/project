@@ -1,0 +1,8 @@
+# *
+User-agent: *
+
+# Host
+Host: https://joy-travel.uz
+
+# Sitemaps
+Sitemap: https://joy-travel.uz/sitemap.xml
