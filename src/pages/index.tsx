@@ -33,6 +33,20 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta name='theme-color' content='#000000' />
         <meta name='description' content='' />
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `<script async src="https://www.googletagmanager.com/gtag/js?id=G-QVFBHS1FKY"></script>
+                    <script>
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+
+                      gtag('config', 'G-QVFBHS1FKY');
+                    </script>`,
+            }}
+          />
+        )}
       </Head>
       <div>
         <Navbar lang={lang} setLang={setLang} />

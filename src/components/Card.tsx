@@ -1,8 +1,12 @@
+import { useState } from 'react'
 import languages from '@/languages'
 import Button from './Button'
+import Modal from './Modal'
 
 const Card = ({ lang }: { lang: any }) => {
-  const people = [
+  const [open, setOpen] = useState(false)
+
+  const cards = [
     {
       id: 1,
       name: languages.egypt[lang],
@@ -46,25 +50,28 @@ const Card = ({ lang }: { lang: any }) => {
       role='list'
       className='mx-auto mt-20 px-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2'
     >
-      {people.map(person => (
-        <li key={person.id} className='bg-white border px-8 rounded'>
+      {cards.map(card => (
+        <li key={card.id} className='bg-white border px-8 rounded'>
           <div className='-translate-y-8'>
             <div className='overflow-hidden'>
               <img
                 className='aspect-[3/2] rounded object-cover hover:scale-110 transition-all ease-in-out duration-1000'
-                src={person.imageUrl}
+                src={card.imageUrl}
                 alt=''
               />
             </div>
             <h3 className='mt-6 text-lg text-center font-semibold leading-8 tracking-tight text-gray-900'>
-              {person.name}
+              {card.name}
             </h3>
-            <p className='text-base leading-7 text-gray-600'>{person.role}</p>
+            <p className='text-base leading-7 text-gray-600'>{card.role}</p>
             <hr className='my-10' />
-            <Button className='mt-2 w-full'>{languages.bookatour[lang]}</Button>
+            <Button className='mt-2 w-full' onClick={() => setOpen(true)}>
+              {languages.bookatour[lang]}
+            </Button>
           </div>
         </li>
       ))}
+      <Modal open={open} setOpen={setOpen} lang={lang} cards={cards} />
     </ul>
   )
 }

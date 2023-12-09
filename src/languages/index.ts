@@ -200,6 +200,17 @@ const languages = {
     "Tez orada siz bilan bog'lanamiz",
   ],
   send: ['Send a message', 'Отправить', 'Habarni yuboring'],
+  cancel: ['Cancel', 'Отмена', 'Bekor qilish'],
+  cac: ['Choose a country', 'Выберите страну', 'Mamlakatni tanlang'],
+  traveldate: ['Travel date', 'Дата поездки', 'Sayohat sanasi'],
+  adults: ['Adults', 'Взрослые', 'Kattalar'],
+  children: ['Children', 'Дети', 'Yosh bolalar'],
+  babies: ['Babies', 'Младенцы', 'Chaqaloqlar'],
+  etdoac: [
+    'Enter data to order a callback',
+    'Введите данные для заказа обратного звонка',
+    "Qayta qo'ng'iroqqa buyurtma berish uchun ma'lumotlarni kiriting",
+  ],
 }
 
 export default languages
