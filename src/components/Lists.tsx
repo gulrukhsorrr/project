@@ -54,7 +54,7 @@ const Lists = ({ lang }: { lang: any }) => {
 
   return (
     <div className='bg-white py-16'>
-      <div className='grid lg:grid-cols-3 sm:grid-cols-2 px-6 grid-cols-1 max-w-7xl mx-auto justify-items-center'>
+      <div className='grid lg:grid-cols-3 sm:grid-cols-2 px-6 grid-cols-1 max-w-7xl mx-auto lg:justify-items-center'>
         {lists.map(list => (
           <div className='flex lg:my-0 my-4 col-span-1' key={list.id}>
             <div className='flex-shrink-0 self-center p-[18px] mr-[30px] bg-gray-100 rounded-full'>

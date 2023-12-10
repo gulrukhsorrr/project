@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Button from './Button'
@@ -13,14 +13,6 @@ export default function Navbar({
   setLang: (value: number | string) => void
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  // const [lang, setLang] = useState<any>(2)
-
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     if (window.localStorage.getItem('langjoy')) setLang(window.localStorage.getItem('langjoy'))
-  //     else window.localStorage.setItem('langjoy', lang)
-  //   }
-  // }, [])
 
   const navigation = [
     { name: languages.aboutus[lang], href: '#' },
@@ -110,6 +102,30 @@ export default function Navbar({
                   </a>
                 ))}
               </div>
+            </div>
+          </div>
+          <div className='sm:hidden block mr-4 items-center'>
+            <div className='mb-4'>
+              <a href='tel:998974420308' className='mr-4'>
+                +998 97 442-03-08
+              </a>
+              <Button variant='text'>{languages.request[lang]}</Button>
+            </div>
+            <div className='items-center'>
+              <select
+                id='language'
+                name='language'
+                className='block w-20 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6'
+                value={lang}
+                onChange={e => {
+                  setLang(e.target.value)
+                  window.localStorage.setItem('langjoy', e.target.value)
+                }}
+              >
+                <option value='2'>Uz</option>
+                <option value='1'>Ru</option>
+                <option value='0'>Eng</option>
+              </select>
             </div>
           </div>
         </Dialog.Panel>
