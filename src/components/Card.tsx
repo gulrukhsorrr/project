@@ -3,8 +3,9 @@ import languages from '@/languages'
 import Button from './Button'
 import Modal from './Modal'
 
-const Card = ({ lang }: { lang: any }) => {
+const Card = ({ lang, token, id }: { lang: any; token: string; id: string }) => {
   const [open, setOpen] = useState(false)
+  const [data, setData] = useState<any>(null)
 
   const cards = [
     {
@@ -65,13 +66,28 @@ const Card = ({ lang }: { lang: any }) => {
             </h3>
             <p className='text-base leading-7 text-gray-600'>{card.role}</p>
             <hr className='my-10' />
-            <Button className='mt-2 w-full' onClick={() => setOpen(true)}>
+            <Button
+              className='mt-2 w-full'
+              onClick={() => {
+                setOpen(true)
+                setData(card)
+              }}
+            >
               {languages.bookatour[lang]}
             </Button>
           </div>
         </li>
       ))}
-      <Modal open={open} setOpen={setOpen} lang={lang} cards={cards} />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        data={data}
+        setData={setData}
+        lang={lang}
+        cards={cards}
+        token={token}
+        id={id}
+      />
     </ul>
   )
 }

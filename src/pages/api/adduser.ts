@@ -12,15 +12,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (userExists) {
       const orders = await Order.find({ user_id: userExists._id })
+
       const addorder = await Order.create({
         amount,
         user_id: userExists._id,
         phone,
         comment,
-        count: orders.length,
+        count: orders.length + 1,
       })
 
-      if (addorder) res.status(201).json({ message: 'Order added', success: true })
+      if (addorder) res.status(201).json({ message: 'Order added', data: addorder, success: true })
       else res.status(400).json({ message: 'Order data invalid', success: false })
     } else {
       const adduser = await User.create({ email, phone })
@@ -33,7 +34,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           count: 1,
         })
 
-        if (addorder) res.status(201).json({ message: 'Order added', success: true })
+        if (addorder)
+          res.status(201).json({ message: 'Order added', data: addorder, success: true })
         else res.status(400).json({ message: 'Order data invalid', success: false })
       } else res.status(400).json({ message: 'User data invalid', success: false })
     }

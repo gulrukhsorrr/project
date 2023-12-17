@@ -3,7 +3,6 @@ import { decode } from 'js-base64'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import TransactionError from '@/errors/transaction.error'
 import Transaction from '@/models/transactionModel'
-import User from '@/models/userModel'
 import Order from '@/models/product'
 import connectDB from '@/libs/db'
 
@@ -29,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       } = params
       let { amount } = params
 
-      const product = await Order.findById(order) // 1
+      const product = await Order.findById(order)
       if (!product) {
         throw new TransactionError(PaymeError.ProductNotFound, id, PaymeData.ProductId)
       }
@@ -39,6 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       res.json({ result: { allow: true } })
+      return
     }
     // CheckTransaction
     else if (method === PaymeMethod.CheckTransaction) {
@@ -57,6 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       res.json({ result, id: params.id })
+      return
     }
     // CreateTransaction
     else if (method === PaymeMethod.CreateTransaction) {
@@ -98,11 +99,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           throw new TransactionError(PaymeError.CantDoOperation, id)
         }
 
-        return {
+        const result = {
           create_time: transaction.create_time,
           transaction: transaction.transaction_id,
           state: TransactionState.Pending,
         }
+
+        res.json({ result, id })
+        return
       }
 
       transaction = await Transaction.findOne({ user_id: product.user_id, product_id: order })
@@ -121,7 +125,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         product_id: product._id,
         create_time: time,
       })
-      console.log(newTransaction)
+
       const result = {
         transaction: newTransaction.transaction_id,
         state: TransactionState.Pending,
@@ -129,9 +133,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       res.json({ result, id })
+      return
     }
     // PerformTransaction
-    else if (PaymeMethod.PerformTransaction) {
+    else if (method === PaymeMethod.PerformTransaction) {
       const currentTime = Date.now()
 
       const transaction = await Transaction.findOne({ transaction_id: params.id })
@@ -144,11 +149,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           throw new TransactionError(PaymeError.CantDoOperation, id)
         }
 
-        return {
+        const result = {
           perform_time: transaction.perform_time,
           transaction: transaction.transaction_id,
           state: TransactionState.Paid,
         }
+
+        res.json({ result, id })
+        return
       }
 
       const expirationTime = (currentTime - transaction.create_time) / 60000 < 12 // 12m
@@ -169,10 +177,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       await Transaction.findByIdAndUpdate(
         transaction._id,
-        {
-          state: TransactionState.Paid,
-          perform_time: currentTime,
-        },
+        { state: TransactionState.Paid, perform_time: currentTime },
         { new: true }
       )
 
@@ -183,14 +188,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       res.json({ result, id })
+      return
     }
     // CancelTransaction
-    else if (PaymeMethod.CancelTransaction) {
+    else if (method === PaymeMethod.CancelTransaction) {
       const transaction = await Transaction.findOne({ transaction_id: params.id })
       if (!transaction) {
         throw new TransactionError(PaymeError.TransactionNotFound, id)
       }
-      console.log(transaction)
 
       const currentTime = Date.now()
 
@@ -198,7 +203,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await Transaction.findByIdAndUpdate(
           transaction._id,
           {
-            state: -Math.abs(transaction.state),
+            state: TransactionState.PaidCanceled,
             reason: params.reason,
             cancel_time: currentTime,
           },
@@ -209,10 +214,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const result = {
         cancel_time: transaction.cancel_time || currentTime,
         transaction: transaction.transaction_id,
-        state: -Math.abs(transaction.state),
+        state: TransactionState.PaidCanceled,
       }
 
       res.json({ result, id })
+      return
     }
   } catch (err: any) {
     if (err.isTransactionError) {

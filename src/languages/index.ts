@@ -211,6 +211,7 @@ const languages = {
     'Введите данные для заказа обратного звонка',
     "Qayta qo'ng'iroqqa buyurtma berish uchun ma'lumotlarni kiriting",
   ],
+  success: ['SMS has been sent', 'СМС было отправлено', 'SMS yuborildi'],
 }
 
 export default languages

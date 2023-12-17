@@ -14,8 +14,9 @@ import Visa from '@/components/Visa'
 import YandexMap from '@/components/YandexMap'
 import Head from 'next/head'
 import languages from '@/languages'
+import axios from 'axios'
 
-export default function Home() {
+export default function Home({ token, id }: { token: string; id: string }) {
   const [lang, setLang] = useState<any>(2)
 
   useEffect(() => {
@@ -23,6 +24,12 @@ export default function Home() {
       if (window.localStorage.getItem('langjoy')) setLang(window.localStorage.getItem('langjoy'))
       else window.localStorage.setItem('langjoy', lang)
     }
+  }, [])
+
+  const connect = async () => await axios.get('/api/connect')
+
+  useEffect(() => {
+    connect()
   }, [])
 
   return (
@@ -48,6 +55,8 @@ export default function Home() {
                 dark
               />
             }
+            token={token}
+            id={id}
           />
         </div>
         <Lists lang={lang} />
@@ -57,7 +66,7 @@ export default function Home() {
         >
           <div className='max-w-7xl mx-auto'>
             <Title lang={lang} title={languages.htatw[lang]} subtitle={languages.hutbutts[lang]} />
-            <Card lang={lang} />
+            <Card lang={lang} token={token} id={id} />
           </div>
         </div>
         <div className='bg-[#1f50a10d] py-20'>
@@ -73,7 +82,12 @@ export default function Home() {
           <Recreation lang={lang} />
         </div>
         <div className='bg-fixed bg-cover' style={{ backgroundImage: 'url("/images/shap22.jpg")' }}>
-          <SendMessage lang={lang} action={<Title lang={lang} title={languages.wylatfy[lang]} />} />
+          <SendMessage
+            lang={lang}
+            action={<Title lang={lang} title={languages.wylatfy[lang]} />}
+            token={token}
+            id={id}
+          />
         </div>
         <div className='pb-20 pt-10'>
           <Title lang={lang} title={languages.photogallery[lang]} subtitle={languages.cotp[lang]} />
@@ -81,10 +95,24 @@ export default function Home() {
         </div>
         <Comments lang={lang} />
         <div className='bg-fixed bg-cover' style={{ backgroundImage: 'url("/images/shap33.jpg")' }}>
-          <SendMessage lang={lang} action={<Title lang={lang} title={languages.luhyfat[lang]} />} />
+          <SendMessage
+            lang={lang}
+            action={<Title lang={lang} title={languages.luhyfat[lang]} />}
+            token={token}
+            id={id}
+          />
         </div>
-        <YandexMap lang={lang} />
+        <YandexMap lang={lang} token={token} id={id} />
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const token = process.env.TTOKEN
+  const id = process.env.TID
+
+  return {
+    props: { token, id },
+  }
 }

@@ -65,7 +65,7 @@ export default function Navbar({
             </select>
           </div>
         </div>
-        <div className='flex'>
+        {/* <div className='flex'>
           <button
             type='button'
             className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
@@ -74,7 +74,7 @@ export default function Navbar({
             <span className='sr-only'>Open main menu</span>
             <Bars3Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-        </div>
+        </div> */}
       </nav>
       <Dialog as='div' className='' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className='fixed inset-0 z-10' />

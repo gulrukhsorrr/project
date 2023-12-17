@@ -1,11 +1,22 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import Button from './Button'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import languages from '@/languages'
+import Notification from './Notification'
 
-const SendMessage = ({ action, lang }: { action?: ReactNode; lang: any }) => {
+const SendMessage = ({
+  action,
+  lang,
+  token,
+  id,
+}: {
+  action?: ReactNode
+  lang: any
+  token: string
+  id: string
+}) => {
   const formSchema = Yup.object().shape({
     name: Yup.string(),
     phone: Yup.string().required(languages.required[lang]),
@@ -18,11 +29,25 @@ const SendMessage = ({ action, lang }: { action?: ReactNode; lang: any }) => {
     setError,
     setValue,
   } = useForm({ mode: 'onTouched', resolver: yupResolver(formSchema) })
+  const [show, setShow] = useState(false)
 
   const onSubmit = (values: any) => {
-    console.log(values)
-    if (!values.agree) {
-      setError('agree', { type: 'manual', message: languages.required[lang] })
+    if (!values.agree) setError('agree', { type: 'manual', message: languages.required[lang] })
+    else {
+      let my_text = `
+Ism: ${values.name || ''} %0A
+Telefon raqam: ${values.phone || ''} %0A`
+
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${id}&text=${my_text}` // &parse_mode = html => teglarini my_text ichida ishlatishga yordam beradi. Lekin ishlamadi warning ham bermadi!!!
+      let api = new XMLHttpRequest()
+      api.open('GET', url, true)
+      api.send()
+      setShow(true)
+      setValue('name', '')
+      setValue('phone', '')
+      setTimeout(() => {
+        setShow(false)
+      }, 3000)
     }
   }
 
@@ -95,6 +120,7 @@ const SendMessage = ({ action, lang }: { action?: ReactNode; lang: any }) => {
           </div>
         </div>
       </div>
+      <Notification show={show} setShow={setShow} lang={lang} />
     </form>
   )
 }
