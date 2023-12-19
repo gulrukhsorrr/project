@@ -37,7 +37,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new TransactionError(PaymeError.InvalidAmount, id)
       }
 
-      res.json({ result: { allow: true } })
+      res.json({
+        result: {
+          allow: true,
+          detail: {
+            receipt_type: 0,
+            items: [
+              {
+                title:
+                  'Sayyohlik agentliklari va turoperatorlarning xizmatlari (barcha turdagi xizmatlar), shu jumladan turistik paketlarni bron qilish, sotish',
+                price: amount,
+                count: 1,
+                code: process.env.MXIK_CODE,
+                vat_percent: 0,
+                package_code: '1495084',
+              },
+            ],
+          },
+        },
+      })
       return
     }
     // CheckTransaction
@@ -203,7 +221,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await Transaction.findByIdAndUpdate(
           transaction._id,
           {
-            state: TransactionState.PaidCanceled,
+            state: -Math.abs(transaction.state),
             reason: params.reason,
             cancel_time: currentTime,
           },
@@ -214,7 +232,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const result = {
         cancel_time: transaction.cancel_time || currentTime,
         transaction: transaction.transaction_id,
-        state: TransactionState.PaidCanceled,
+        state: -Math.abs(transaction.state),
       }
 
       res.json({ result, id })
