@@ -190,9 +190,9 @@ const languages = {
     "Biz bilan istalgan qulay usulda bog'lanishingiz yoki qo'ng'iroqqa buyurtma berishingiz mumkin",
   ],
   address: [
-    'Uzbekistan, Tashkent city, Shaykhantakhur district, st. Samarkand Darvoza, 4A building, apt. 43',
-    'Узбекистан, г. Ташкент, Шайхантахурский район, ​​​​​​​ул. Самарканд Дарвоза, 4А дом, кв.43',
-    'Oʻzbekiston, Toshkent shahri, Shayxontoxur tumani, st. Samarqand Darvoza, 4A bino, 43-uy',
+    '1 Sirdarya Street, Mirzo Ulugbek District',
+    'Мирзо Улугбек тумани Сирдарё кочаси 1',
+    "Mirzo Ulug'bek tumani Sirdaryo ko'chasi 1",
   ],
   wwcys: [
     'We will contact you shortly',

@@ -49,8 +49,8 @@ Telefon raqam: ${values.phone || ''} %0A`
         className='bg-no-repeat bg-cover'
       >
         <div className='container p-6 lg:px-8 max-w-7xl mx-auto w-full'>
-          <Map defaultState={{ center: [41.316429, 69.248387], zoom: 11 }} width='100%'>
-            <Placemark geometry={[41.316429, 69.248387]} />
+          <Map defaultState={{ center: [41.316429, 69.248387], zoom: 12 }} width='100%'>
+            <Placemark geometry={[41.325848, 69.348939]} />
           </Map>
           <div className='grid md:grid-cols-2 grid-cols-1 lg:gap-x-32 gap-x-16 mt-14'>
             <div>
@@ -58,11 +58,11 @@ Telefon raqam: ${values.phone || ''} %0A`
               <p className='text-base text-gray-900 mt-1 mb-4 leading-[140%]'>
                 {languages.yccuiacwooac[lang]}
               </p>
-              <a href='tel:998' className='pt-4 text-xl block font-bold'>
-                +998 98 888-00-94
+              <a href='tel:998950990777' className='pt-4 text-xl block font-bold'>
+                +998 95 099-07-77
               </a>
-              <a href='mailto:' className='pt-4 text-base block'>
-                info@musafirtour.uz
+              <a href='mailto:joytaveluz@gmail.com' className='pt-4 text-base block'>
+                joytaveluz@gmail.com
               </a>
               <p className='text-base text-gray-900 mt-4 leading-[140%]'>
                 {languages.address[lang]}

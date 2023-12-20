@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import Button from './Button'
 import Link from 'next/link'
 import languages from '@/languages'
@@ -42,12 +42,15 @@ export default function Navbar({
           </Link>
         </div>
         <div className='sm:flex hidden mr-4 items-center'>
-          <a href='tel:998974420308' className='mr-4'>
-            +998 97 442-03-08
+          <a href='tel:998950990777' className='mr-4'>
+            +998 95 099-07-77
           </a>
-          <Button variant='text' className='mr-4'>
+          <Link
+            href='tel:998950990777'
+            className='mr-4 rounded px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-red-600 bg-red-50 focus-visible:outline-red-50'
+          >
             {languages.request[lang]}
-          </Button>
+          </Link>
           <div className='items-center'>
             <select
               id='language'
@@ -106,8 +109,8 @@ export default function Navbar({
           </div>
           <div className='sm:hidden block mr-4 items-center'>
             <div className='mb-4'>
-              <a href='tel:998974420308' className='mr-4'>
-                +998 97 442-03-08
+              <a href='tel:998950990777' className='mr-4'>
+                +998 95 099-07-77
               </a>
               <Button variant='text'>{languages.request[lang]}</Button>
             </div>

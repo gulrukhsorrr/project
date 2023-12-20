@@ -24,12 +24,6 @@ const Payment = ({ lang, merchant_key, url }: { lang: any; merchant_key: string;
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>()
 
-  // https://checkout.paycom.uz/
-  // https://checkout.paycom.uz/base64(m=587f72c72cac0d162c722ae2;ac.order_id=197;a=500;c=callback_url)
-  // const key = process.env.TEST_KEY
-  // const url = process.env.SITE_URL
-  console.log(merchant_key)
-
   const onSubmit = async (values: any) => {
     setLoading(true)
     await axios({
