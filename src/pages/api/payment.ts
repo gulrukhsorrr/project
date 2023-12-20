@@ -15,7 +15,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const data = decode(token)
 
-    if (!data.includes(process.env.TEST_KEY!)) {
+    // if (!data.includes(process.env.TEST_KEY!)) {
+    if (!data.includes(process.env.KEY!)) {
       throw new TransactionError(PaymeError.InvalidAuthorization, id)
     }
 

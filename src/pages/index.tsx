@@ -16,7 +16,17 @@ import Head from 'next/head'
 import languages from '@/languages'
 import axios from 'axios'
 
-export default function Home({ token, id }: { token: string; id: string }) {
+export default function Home({
+  token,
+  id,
+  merchant_key,
+  url,
+}: {
+  token: string
+  id: string
+  merchant_key: string
+  url: string
+}) {
   const [lang, setLang] = useState<any>(2)
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export default function Home({ token, id }: { token: string; id: string }) {
         </div>
         <div className='py-20'>
           <Title lang={lang} title={languages.prn[lang]} />
-          <Payment lang={lang} />
+          <Payment lang={lang} merchant_key={merchant_key} url={url} />
         </div>
         <Visa lang={lang} />
         <div className='pb-20'>
@@ -111,8 +121,10 @@ export default function Home({ token, id }: { token: string; id: string }) {
 export async function getStaticProps() {
   const token = process.env.TTOKEN
   const id = process.env.TID
+  const merchant_key = process.env.PAYME_MERCHANT_KEY
+  const url = process.env.SITE_URL
 
   return {
-    props: { token, id },
+    props: { token, id, merchant_key, url },
   }
 }

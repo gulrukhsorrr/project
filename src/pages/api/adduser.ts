@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         comment,
         count: orders.length + 1,
       })
+      console.log(addorder)
 
       if (addorder) res.status(201).json({ message: 'Order added', data: addorder, success: true })
       else res.status(400).json({ message: 'Order data invalid', success: false })
@@ -33,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           comment,
           count: 1,
         })
+        console.log(addorder)
 
         if (addorder)
           res.status(201).json({ message: 'Order added', data: addorder, success: true })

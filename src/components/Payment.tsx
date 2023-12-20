@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import { encode } from 'js-base64'
 import { useState } from 'react'
 
-const Payment = ({ lang }: { lang: any }) => {
+const Payment = ({ lang, merchant_key, url }: { lang: any; merchant_key: string; url: string }) => {
   const formSchema = yup.object().shape({
     amount: yup.string().required(languages.required[lang]),
     email: yup.string().required(languages.required[lang]).email(),
@@ -26,18 +26,23 @@ const Payment = ({ lang }: { lang: any }) => {
 
   // https://checkout.paycom.uz/
   // https://checkout.paycom.uz/base64(m=587f72c72cac0d162c722ae2;ac.order_id=197;a=500;c=callback_url)
-  const key = process.env.TEST_KEY
-  const url = process.env.SITE_URL
+  // const key = process.env.TEST_KEY
+  // const url = process.env.SITE_URL
+  console.log(merchant_key)
 
   const onSubmit = async (values: any) => {
     setLoading(true)
-    await axios({ url: '/api/adduser', method: 'post', data: values })
-      .then(res => {
+    await axios({
+      url: '/api/adduser',
+      method: 'post',
+      data: { ...values, amount: values.amount * 100 },
+    })
+      .then(async res => {
         setLoading(false)
         if (res?.data?.success) {
           router.replace(
             `https://checkout.paycom.uz/${encode(
-              `m=${key};ac.order=${res.data._id};a=${res.data.amount}`
+              `m=${merchant_key};ac.order=${res.data.data._id};a=${res.data.data.amount}`
             )}`
           )
         }
