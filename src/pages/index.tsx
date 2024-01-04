@@ -15,6 +15,7 @@ import YandexMap from '@/components/YandexMap'
 import Head from 'next/head'
 import languages from '@/languages'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 export default function Home({
   token,
@@ -27,7 +28,12 @@ export default function Home({
   merchant_key: string
   url: string
 }) {
+  const router = useRouter()
   const [lang, setLang] = useState<any>(2)
+
+  useEffect(() => {
+    router.replace('test-page')
+  }, [])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
