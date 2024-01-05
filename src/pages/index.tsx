@@ -32,7 +32,7 @@ export default function Home({
   const [lang, setLang] = useState<any>(2)
 
   useEffect(() => {
-    router.replace('test-page')
+    router.replace('https://mirzamurod.uz/')
   }, [])
 
   useEffect(() => {
