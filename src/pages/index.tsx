@@ -42,12 +42,6 @@ export default function Home({
     }
   }, [])
 
-  const connect = async () => await axios.get('/api/connect')
-
-  useEffect(() => {
-    connect()
-  }, [])
-
   return (
     <>
       <Head>
