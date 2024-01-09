@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Button from './Button'
 import Link from 'next/link'
 import languages from '@/languages'
+import { Bars3Icon } from '@heroicons/react/20/solid'
 
 export default function Navbar({
   lang,
@@ -26,14 +27,24 @@ export default function Navbar({
     // { name: 'Сертификаты №8', href: '#' },
   ]
 
+  const changeLang = (lang: string) => {
+    if (typeof window !== 'undefined') {
+      setLang(lang)
+      window.localStorage.setItem('langjoy', lang)
+    }
+  }
+
   return (
     <header className='bg-white'>
       <nav
         className='flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto'
         aria-label='Global'
       >
-        <div className='flex lg:flex-1'>
-          <Link href='/' className='-m-1.5 p-1.5 text-xl font-bold flex items-center'>
+        <div className='flex lg:flex-1 w-full'>
+          <Link
+            href='/'
+            className='-m-1.5 p-1.5 text-xl font-bold flex md:justify-normal justify-around items-center md:w-auto w-full'
+          >
             <img src='/images/logo.jpg' alt='logo' className='mr-1 w-20 h-10 -mb-1.5' />
             <div>
               JOY-TRAVEL.UZ
@@ -41,7 +52,7 @@ export default function Navbar({
             </div>
           </Link>
         </div>
-        <div className='sm:flex hidden mr-4 items-center'>
+        <div className='md:flex hidden mr-4 items-center'>
           <a href='tel:998950990777' className='mr-4'>
             +998 95 099-07-77
           </a>
@@ -51,24 +62,28 @@ export default function Navbar({
           >
             {languages.request[lang]}
           </Link>
-          <div className='items-center'>
-            <select
-              id='language'
-              name='language'
-              className='block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6'
-              value={lang}
-              onChange={e => {
-                setLang(e.target.value)
-                window.localStorage.setItem('langjoy', e.target.value)
-              }}
-            >
-              <option value='2'>Uz</option>
-              <option value='1'>Ru</option>
-              <option value='0'>Eng</option>
-            </select>
+          <div className='items-center flex'>
+            <img
+              src='/images/uz.png'
+              alt='uz'
+              className='mr-2 hover:cursor-pointer'
+              onClick={() => changeLang('2')}
+            />
+            <img
+              src='/images/en.png'
+              alt='en'
+              className='mr-2 hover:cursor-pointer'
+              onClick={() => changeLang('0')}
+            />
+            <img
+              src='/images/ru.png'
+              alt='ru'
+              className='mr-2 hover:cursor-pointer'
+              onClick={() => changeLang('1')}
+            />
           </div>
         </div>
-        {/* <div className='flex'>
+        {/* <div className='md:hidden flex'>
           <button
             type='button'
             className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
@@ -79,6 +94,39 @@ export default function Navbar({
           </button>
         </div> */}
       </nav>
+      <div className='md:hidden flex flex-col'>
+        <div className='flex justify-around items-center'>
+          <a href='tel:998950990777' className='mr-4'>
+            +998 95 099-07-77
+          </a>
+          <Link
+            href='tel:998950990777'
+            className='mr-4 rounded px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 text-red-600 bg-red-50 focus-visible:outline-red-50'
+          >
+            {languages.request[lang]}
+          </Link>
+        </div>
+        <div className='items-center flex justify-center my-4'>
+          <img
+            src='/images/uz.png'
+            alt='uz'
+            className='mr-2 hover:cursor-pointer'
+            onClick={() => changeLang('2')}
+          />
+          <img
+            src='/images/en.png'
+            alt='en'
+            className='mr-2 hover:cursor-pointer'
+            onClick={() => changeLang('0')}
+          />
+          <img
+            src='/images/ru.png'
+            alt='ru'
+            className='mr-2 hover:cursor-pointer'
+            onClick={() => changeLang('1')}
+          />
+        </div>
+      </div>
       <Dialog as='div' className='' open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className='fixed inset-0 z-10' />
         <Dialog.Panel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
@@ -92,7 +140,7 @@ export default function Navbar({
               <XMarkIcon className='h-6 w-6' aria-hidden='true' />
             </button>
           </div>
-          <div className='mt-6 flow-root'>
+          {/* <div className='mt-6 flow-root'>
             <div className='-my-6 divide-y divide-gray-500/10'>
               <div className='space-y-2 py-6'>
                 {navigation.map(item => (
@@ -106,30 +154,17 @@ export default function Navbar({
                 ))}
               </div>
             </div>
-          </div>
-          <div className='sm:hidden block mr-4 items-center'>
-            <div className='mb-4'>
+          </div> */}
+          <div className='sm:hidden block mr-4 mt-4 items-center'>
+            <div className='mb-4 flex flex-col'>
               <a href='tel:998950990777' className='mr-4'>
                 +998 95 099-07-77
               </a>
-              <Button variant='text'>{languages.request[lang]}</Button>
+              <Button variant='text' className='mt-4'>
+                {languages.request[lang]}
+              </Button>
             </div>
-            <div className='items-center'>
-              <select
-                id='language'
-                name='language'
-                className='block w-20 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 sm:text-sm sm:leading-6'
-                value={lang}
-                onChange={e => {
-                  setLang(e.target.value)
-                  window.localStorage.setItem('langjoy', e.target.value)
-                }}
-              >
-                <option value='2'>Uz</option>
-                <option value='1'>Ru</option>
-                <option value='0'>Eng</option>
-              </select>
-            </div>
+            <div className='items-center mt-4'></div>
           </div>
         </Dialog.Panel>
       </Dialog>

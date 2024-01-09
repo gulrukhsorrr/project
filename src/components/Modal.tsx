@@ -203,9 +203,10 @@ Telefon raqam: ${values.phone} %0A`
                           className='mt-2 block w-full rounded border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6'
                           dateFormat='yyyy/MM/dd'
                           minDate={new Date()}
-                          closeOnScroll={true}
+                          // closeOnScroll={true}
                           selected={startDate}
                           onChange={date => setStartDate(date!)}
+                          disabledKeyboardNavigation
                         />
                       </div>
                       {/* adults */}

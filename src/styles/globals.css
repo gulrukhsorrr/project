@@ -9,6 +9,10 @@
   font-family: 'Fira Sans', sans-serif;
 }
 
+body {
+  background-color: #fff;
+}
+
 b {
   color: black;
 }
@@ -42,4 +46,9 @@ b {
 
 .react-datepicker-wrapper {
   width: 100%;
+}
+
+.bgi {
+  background-repeat: no-repeat;
+  background-size: cover;
 }

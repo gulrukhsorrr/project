@@ -46,7 +46,8 @@ export default function Home({
       <Head>
         <title>Joy Travel</title>
         <link rel='icon' href='./images/icon.jpg' type='image/jpg' sizes='any' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
         <meta name='theme-color' content='#000000' />
         <meta
           name='description'
@@ -68,7 +69,7 @@ export default function Home({
       <div>
         <Navbar lang={lang} setLang={setLang} />
         <Carousel lang={lang} />
-        <div className='bg-fixed bg-cover' style={{ backgroundImage: 'url("/images/shap33.jpg")' }}>
+        <div className='bgi md:bg-fixed' style={{ backgroundImage: 'url("/images/shap33.jpg")' }}>
           <SendMessage
             lang={lang}
             action={
@@ -84,10 +85,7 @@ export default function Home({
           />
         </div>
         <Lists lang={lang} />
-        <div
-          className='bg-fixed bg-cover pt-14 pb-20'
-          style={{ backgroundImage: 'url("/images/fon_tur.jpg")' }}
-        >
+        <div className='bgi md:bg-fixed pt-14 pb-20' style={{ backgroundImage: 'url("/images/fon_tur.jpg")' }}>
           <div className='max-w-7xl mx-auto'>
             <Title lang={lang} title={languages.htatw[lang]} subtitle={languages.hutbutts[lang]} />
             <Card lang={lang} token={token} id={id} />
@@ -105,7 +103,7 @@ export default function Home({
         <div className='pb-20'>
           <Recreation lang={lang} />
         </div>
-        <div className='bg-fixed bg-cover' style={{ backgroundImage: 'url("/images/shap22.jpg")' }}>
+        <div className='bgi md:bg-fixed' style={{ backgroundImage: 'url("/images/shap22.jpg")' }}>
           <SendMessage
             lang={lang}
             action={<Title lang={lang} title={languages.wylatfy[lang]} />}
@@ -118,7 +116,7 @@ export default function Home({
           <CarouselGall />
         </div>
         <Comments lang={lang} />
-        <div className='bg-fixed bg-cover' style={{ backgroundImage: 'url("/images/shap33.jpg")' }}>
+        <div className='bgi md:bg-fixed' style={{ backgroundImage: 'url("/images/shap33.jpg")' }}>
           <SendMessage
             lang={lang}
             action={<Title lang={lang} title={languages.luhyfat[lang]} />}

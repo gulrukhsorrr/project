@@ -168,8 +168,8 @@ const languages = {
     'Eng yuqori darajada dam olish!',
   ],
   rathlc: [
-    `The field of activity of <b>"MUSAFIRTOUR"</b> includes the whole range of services related to the provision of tourist trips. With us you can order a tour that will fully meet your needs and wishes. We will help you realize your dream of vacation, wherever you want to go, freeing you from the burdensome burden of collecting documents.`,
-    'Сфера деятельности <b>«MUSAFIRTOUR»</b> включает весь спектр услуг, связанный с обеспечением туристических поездок. У нас вы сможете заказать тур, который будет полностью соответствовать вашим запросам и пожеланиям. Мы поможем осуществить вашу мечту об отдыхе, куда бы вы ни захотели отправиться, освободив вас от обременительной нагрузки сбора документов.',
+    `The field of activity of <b>"JOY TRAVEL"</b> includes the whole range of services related to the provision of tourist trips. With us you can order a tour that will fully meet your needs and wishes. We will help you realize your dream of vacation, wherever you want to go, freeing you from the burdensome burden of collecting documents.`,
+    'Сфера деятельности <b>«JOY TRAVEL»</b> включает весь спектр услуг, связанный с обеспечением туристических поездок. У нас вы сможете заказать тур, который будет полностью соответствовать вашим запросам и пожеланиям. Мы поможем осуществить вашу мечту об отдыхе, куда бы вы ни захотели отправиться, освободив вас от обременительной нагрузки сбора документов.',
     `<b>"JOY TRAVEL"</b> kompaniyasining faoliyat sohasi turistik sayohatlarni taqdim etish bilan bog\'liq xizmatlarning butun majmuasini o\'z ichiga oladi. Biz bilan siz o\'zingizning ehtiyojlaringiz va istaklaringizga to\'liq javob beradigan turga buyurtma berishingiz mumkin. Biz sizga ta\'til haqidagi orzuingizni ro\'yobga chiqarishga yordam beramiz, qayerga bormoqchi bo\'lsangiz ham, hujjatlarni yig\'ishning og\'ir yukidan xalos qilamiz.`,
   ],
   wylatfy: [
