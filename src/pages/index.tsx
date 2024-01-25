@@ -47,7 +47,7 @@ export default function Home({
         <title>Joy Travel</title>
         <link rel='icon' href='./images/icon.jpg' type='image/jpg' sizes='any' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta name='theme-color' content='#000000' />
         <meta
           name='description'
@@ -85,17 +85,21 @@ export default function Home({
           />
         </div>
         <Lists lang={lang} />
-        <div className='bgi md:bg-fixed pt-14 pb-20' style={{ backgroundImage: 'url("/images/fon_tur.jpg")' }}>
+        <div
+          className='bgi md:bg-fixed pt-14 pb-20'
+          style={{ backgroundImage: 'url("/images/fon_tur.jpg")' }}
+          id='tatw'
+        >
           <div className='max-w-7xl mx-auto'>
             <Title lang={lang} title={languages.htatw[lang]} subtitle={languages.hutbutts[lang]} />
             <Card lang={lang} token={token} id={id} />
           </div>
         </div>
-        <div className='bg-[#1f50a10d] py-20'>
+        <div className='bg-[#1f50a10d] py-20' id='ttu'>
           <Title lang={lang} title={languages.uttsu[lang]} />
           <Images lang={lang} />
         </div>
-        <div className='py-20'>
+        <div className='py-20' id='aop'>
           <Title lang={lang} title={languages.prn[lang]} />
           <Payment lang={lang} merchant_key={merchant_key} url={url} />
         </div>
@@ -111,7 +115,7 @@ export default function Home({
             id={id}
           />
         </div>
-        <div className='pb-20 pt-10'>
+        <div className='pb-20 pt-10' id='photogallery'>
           <Title lang={lang} title={languages.photogallery[lang]} subtitle={languages.cotp[lang]} />
           <CarouselGall />
         </div>

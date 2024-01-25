@@ -29,7 +29,7 @@ const Comments = ({ lang }: { lang: any }) => {
   ]
 
   return (
-    <div className='bg-[#1f50a10d] py-10'>
+    <div className='bg-[#1f50a10d] py-10' id='reviews'>
       <Title lang={lang} title={languages.ffoc[lang]} />
       <Swiper
         slidesPerView={1}

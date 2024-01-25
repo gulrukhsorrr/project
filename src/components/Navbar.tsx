@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import Button from './Button'
 import Link from 'next/link'
 import languages from '@/languages'
 import { Bars3Icon } from '@heroicons/react/20/solid'
+// @ts-ignore
+import ScrollspyNav from 'react-scrollspy-nav'
 
 export default function Navbar({
   lang,
@@ -14,16 +16,33 @@ export default function Navbar({
   setLang: (value: number | string) => void
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [show, setShow] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll)
+      return () => window.removeEventListener('scroll', handleScroll)
+    }
+  }, [show])
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+  }, [isOpen])
+
+  const handleScroll = () => {
+    if (typeof window !== 'undefined') setShow(window.scrollY > 100)
+  }
 
   const navigation = [
-    { name: languages.aboutus[lang], href: '#' },
-    { name: languages.tatw[lang], href: '#' },
-    { name: languages.ttu[lang], href: '#' },
-    { name: languages.viu[lang], href: '#' },
-    { name: languages.photogallery[lang], href: '#' },
-    { name: languages.reviews[lang], href: '#' },
-    { name: languages.contact[lang], href: '#' },
-    { name: languages.aop[lang], href: '#' },
+    { name: languages.aboutus[lang], href: '#aboutus' },
+    { name: languages.tatw[lang], href: '#tatw' },
+    { name: languages.ttu[lang], href: '#ttu' },
+    { name: languages.viu[lang], href: '#viu' },
+    { name: languages.photogallery[lang], href: '#photogallery' },
+    { name: languages.reviews[lang], href: '#reviews' },
+    { name: languages.contact[lang], href: '#contact' },
+    { name: languages.aop[lang], href: '#aop' },
     // { name: 'Сертификаты №8', href: '#' },
   ]
 
@@ -83,7 +102,7 @@ export default function Navbar({
             />
           </div>
         </div>
-        {/* <div className='md:hidden flex'>
+        <div className=''>
           <button
             type='button'
             className='-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700'
@@ -92,7 +111,7 @@ export default function Navbar({
             <span className='sr-only'>Open main menu</span>
             <Bars3Icon className='h-6 w-6' aria-hidden='true' />
           </button>
-        </div> */}
+        </div>
       </nav>
       <div className='md:hidden flex flex-col'>
         <div className='flex justify-around items-center'>
@@ -140,21 +159,38 @@ export default function Navbar({
               <XMarkIcon className='h-6 w-6' aria-hidden='true' />
             </button>
           </div>
-          {/* <div className='mt-6 flow-root'>
-            <div className='-my-6 divide-y divide-gray-500/10'>
-              <div className='space-y-2 py-6'>
-                {navigation.map(item => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
-                  >
-                    {item.name}
-                  </a>
-                ))}
+          <ScrollspyNav
+            scrollTargetIds={[
+              'aboutus',
+              'tatw',
+              'ttu',
+              'viu',
+              'photogallery',
+              'reviews',
+              'contact',
+              'aop',
+            ]}
+            // offset={-136}
+            activeNavClass='active'
+            scrollDuration='300'
+          >
+            <div className='mt-6 flow-root'>
+              <div className='-my-6 divide-y divide-gray-500/10'>
+                <div className='space-y-2 py-6'>
+                  {navigation.map(item => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className='-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50'
+                    >
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
-          </div> */}
+          </ScrollspyNav>
           <div className='sm:hidden block mr-4 mt-4 items-center'>
             <div className='mb-4 flex flex-col'>
               <a href='tel:998950990777' className='mr-4'>

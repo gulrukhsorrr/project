@@ -47,6 +47,7 @@ Telefon raqam: ${values.phone || ''} %0A`
       <div
         style={{ backgroundImage: 'url("/images/fon_tur.jpg")' }}
         className='bg-no-repeat bg-cover'
+        id='contact'
       >
         <div className='container p-6 lg:px-8 max-w-7xl mx-auto w-full'>
           <Map defaultState={{ center: [41.316429, 69.248387], zoom: 12 }} width='100%'>
